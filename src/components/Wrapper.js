@@ -1,0 +1,142 @@
+import React, { Component } from "react";
+import wrapstyle from "../styles/wrapper.module.css";
+import MainArea from "./MainArea";
+import SidebarColor from "./SidebarColor";
+import SidebarFolder from "./SidebarFolder";
+
+class Wrapper extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeFolder: 0,
+      tasks: [
+        {
+          id: 0,
+          folder: 0,
+          title: "Lorem ipsum dolor sit amet consectetur adipisicing.",
+          content:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        },
+        {
+          id: 1,
+          folder: 0,
+          title: "2 Lorem ipsum dolor sit amet consectetur adipisicing.",
+          content:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        },
+        {
+          id: 2,
+          folder: 1,
+          title: "2 Lorem ipsum dolor sit amet consectetur adipisicing.",
+          content:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        },
+      ],
+      folders: [
+        {
+          id: 0,
+          title: "College",
+          theme: 1,
+        },
+        {
+          id: 1,
+          title: "School",
+          theme: 2,
+        },
+        {
+          id: 3,
+          title: "School",
+          theme: 3,
+        },
+        {
+          id: 2,
+          title: "School",
+          theme: 0,
+        },
+      ],
+      themes: [
+        {
+          id: 0,
+          fg: "#fff",
+          bg: "#000",
+        },
+        {
+          id: 1,
+          fg: "#fff",
+          bg: "#f00",
+        },
+        {
+          id: 2,
+          fg: "#000",
+          bg: "#ff0",
+        },
+        {
+          id: 3,
+          fg: "#fff",
+          bg: "#f0f",
+        },
+        {
+          id: 4,
+          fg: "#f0f",
+          bg: "#0f0",
+        },
+      ],
+    };
+  }
+  setActive = (id) => {
+    this.setState({
+      activeFolder: id,
+    });
+  };
+
+  updateTheme = (id) => {
+    let curr = this.state.folders.findIndex(
+      (ele) => ele.id === this.state.activeFolder
+    );
+    let newFolder = [...this.state.folders];
+    if (
+      this.state.activeFolder !== undefined &&
+      newFolder[curr] !== undefined
+    ) {
+      newFolder[curr].theme = id;
+    }
+    this.setState({
+      folders: newFolder,
+    });
+  };
+
+  deleteFolder = (id) => {
+    this.setState((prevState) => ({
+      folders: prevState.folders.filter((item) => item.id !== id),
+    }));
+  };
+
+  render() {
+    return (
+      <div className={wrapstyle.wrapper}>
+        <MainArea
+          data={this.state.tasks}
+          active={this.state.activeFolder}
+          theme={this.state.themes}
+          folders={this.state.folders}
+        />
+        <SidebarFolder
+          data={this.state.folders}
+          active={this.state.activeFolder}
+          theme={this.state.themes}
+          changeFolder={this.setActive}
+          delFolder={this.deleteFolder}
+        />
+        <SidebarColor
+          update={this.updateTheme}
+          active={this.state.activeFolder}
+          data={this.state.themes}
+          folders={this.state.folders}
+        />
+      </div>
+    );
+  }
+}
+
+export default Wrapper;

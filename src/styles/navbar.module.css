@@ -1,0 +1,55 @@
+.navbar {
+    height: 4rem;
+    line-height: 4rem;
+    display: flex;
+    /* background-color: #161A35; */
+    background-color: #20283E;
+    justify-content: space-between;
+}
+
+.brand {
+    padding: 0 2rem;
+    color: #d2dee0;
+    font-size: 1.1rem;
+    font-family: 'Montserrat';
+    font-weight: 500;
+}
+
+.navbar ul {
+    display: flex;
+    padding-right: 2rem;
+    
+    
+}
+
+.navbar ul li{
+    list-style-type: none;
+    padding: 0 .5rem;
+    line-height: 4rem;
+    font-size: .8rem;
+    color: #d2dee0;
+    font-family: 'Montserrat';
+}
+
+@media screen and (min-width : 420px) {
+    .navbar{
+        justify-content: space-around;
+    }
+    .brand{
+        font-size: 1.3rem;
+    }
+    .navbar ul li{
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (min-width : 720px) {
+    .navbar ul li {
+        padding: 0 2rem;
+    }
+}
+@media screen and (min-width : 2000px) {
+    .navbar {
+        justify-content: space-evenly;
+    }
+}
