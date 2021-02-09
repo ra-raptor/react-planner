@@ -14,7 +14,7 @@ class Wrapper extends Component {
         {
           id: 0,
           folder: 0,
-          title: "Lorem ipsum dolor sit amet consectetur adipisicing.",
+          title: "vfLorem ipsum dolor sit amet consectetur adipisicing.",
           content:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         },
@@ -28,7 +28,7 @@ class Wrapper extends Component {
         {
           id: 2,
           folder: 1,
-          title: "2 Lorem ipsum dolor sit amet consectetur adipisicing.",
+          title: "3 Lorem ipsum dolor sit amet consectetur adipisicing.",
           content:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         },
@@ -90,6 +90,12 @@ class Wrapper extends Component {
     });
   };
 
+  remove_task = (id) => {
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.filter((item) => item.id !== id),
+    }));
+  };
+
   updateTheme = (id) => {
     let curr = this.state.folders.findIndex(
       (ele) => ele.id === this.state.activeFolder
@@ -107,6 +113,15 @@ class Wrapper extends Component {
   };
 
   deleteFolder = (id) => {
+    let tasks = this.state.tasks.filter((item) => item.folder === id);
+    let id_list = [];
+    tasks.forEach((i) => {
+      id_list.push(i.id);
+    });
+    id_list.forEach((idl) => {
+      this.remove_task(idl);
+    });
+
     this.setState((prevState) => ({
       folders: prevState.folders.filter((item) => item.id !== id),
     }));
@@ -120,6 +135,7 @@ class Wrapper extends Component {
           active={this.state.activeFolder}
           theme={this.state.themes}
           folders={this.state.folders}
+          delTask={this.remove_task}
         />
         <SidebarFolder
           data={this.state.folders}

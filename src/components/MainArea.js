@@ -22,18 +22,19 @@ function MainArea(props) {
     // console.log(active_theme);
   }
   const taskStyle = {
-    color: active_theme.fg,
-    background: active_theme.bg,
+    color: active_theme?.fg,
+    background: active_theme?.bg,
   };
   const button_style = {
     // border: "1px solid #20283E",
-    borderColor: active_theme.fg,
-    color: active_theme.fg,
+    borderColor: active_theme?.fg,
+    color: active_theme?.fg,
   };
   let filter_folder = (item) => item.folder === props.active;
   let items_to_display = props.data.filter((item) => filter_folder(item));
 
-  console.log(items_to_display);
+  // console.log(items_to_display);
+
   let item_builder = (item) => {
     return (
       <div style={taskStyle} key={item.id} className={wrapstyle.main_item}>
@@ -45,7 +46,7 @@ function MainArea(props) {
           <button style={button_style}>
             <FontAwesomeIcon icon={faPencilAlt} />
           </button>
-          <button style={button_style}>
+          <button onClick={() => props.delTask(item.id)} style={button_style}>
             <FontAwesomeIcon icon={faTrashAlt} />
           </button>
         </div>
