@@ -83,6 +83,9 @@ class Wrapper extends Component {
         },
       ],
       colorModalDisplay: false,
+      folderModalDisplay: false,
+      addTaskModalDisplay: false,
+      editTaskModalDisplay: false,
     };
   }
   setActive = (id) => {
@@ -98,10 +101,19 @@ class Wrapper extends Component {
     });
   };
 
+  addFolderModal = () => {
+    this.setState({
+      folderModalDisplay: !this.state.folderModalDisplay,
+    });
+  };
+
   remove_task = (id) => {
-    this.setState((prevState) => ({
-      tasks: prevState.tasks.filter((item) => item.id !== id),
-    }));
+    let x = window.confirm("Are you sure, you want to delete this task?");
+    if (x) {
+      this.setState((prevState) => ({
+        tasks: prevState.tasks.filter((item) => item.id !== id),
+      }));
+    }
   };
 
   updateTheme = (id) => {
@@ -121,21 +133,24 @@ class Wrapper extends Component {
   };
 
   deleteFolder = (id) => {
-    let tasks = this.state.tasks.filter((item) => item.folder === id);
-    let id_list = [];
-    tasks.forEach((i) => {
-      id_list.push(i.id);
-    });
-    id_list.forEach((idl) => {
-      this.remove_task(idl);
-    });
+    let x = window.confirm("Are you sure, you want to delete this folder?");
+    if (x) {
+      let tasks = this.state.tasks.filter((item) => item.folder === id);
+      let id_list = [];
+      tasks.forEach((i) => {
+        id_list.push(i.id);
+      });
+      id_list.forEach((idl) => {
+        this.remove_task(idl);
+      });
 
-    this.setState((prevState) => ({
-      folders: prevState.folders.filter((item) => item.id !== id),
-    }));
-    this.setState({
-      activeFolder: null,
-    });
+      this.setState((prevState) => ({
+        folders: prevState.folders.filter((item) => item.id !== id),
+      }));
+      this.setState({
+        activeFolder: null,
+      });
+    }
   };
 
   render() {
@@ -154,6 +169,8 @@ class Wrapper extends Component {
           theme={this.state.themes}
           changeFolder={this.setActive}
           delFolder={this.deleteFolder}
+          showModal={this.state.folderModalDisplay}
+          toggleModal={this.addFolderModal}
         />
         <SidebarColor
           update={this.updateTheme}

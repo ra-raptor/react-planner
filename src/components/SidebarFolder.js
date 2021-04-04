@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import wrapstyle from "../styles/wrapper.module.css";
+import AddFolder from "./modals/AddFolder";
 
 let folderGenerator = (folder, theme, active, chfunc, dlfunc) => {
   const folderStyle = {
@@ -34,10 +35,14 @@ let folderGenerator = (folder, theme, active, chfunc, dlfunc) => {
 };
 
 function SidebarFolder(props) {
+  let modal = props.showModal ? (
+    <AddFolder toggleModal={props.toggleModal} />
+  ) : null;
   // console.log(props.theme);
   return (
     <div className={wrapstyle.sidebar_folder}>
       Folders
+      {modal}
       {props.data.map((folder) =>
         folderGenerator(
           folder,
@@ -48,7 +53,12 @@ function SidebarFolder(props) {
         )
       )}
       <div className={wrapstyle.folder_container}>
-        <div className={wrapstyle.add_folder}>ADD FOLDER </div>
+        <div
+          onClick={() => props.toggleModal()}
+          className={wrapstyle.add_folder}
+        >
+          ADD FOLDER
+        </div>
       </div>
     </div>
   );
