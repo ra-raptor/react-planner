@@ -2,6 +2,7 @@ import React from "react";
 import wrapstyle from "../styles/wrapper.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import AddColor from "./modals/AddColor";
 
 let colorboxBuilder = (item, active, updfunc) => {
   const bgstyle = (col) => {
@@ -32,6 +33,13 @@ let colorboxBuilder = (item, active, updfunc) => {
 };
 
 function SidebarColor(props) {
+  let setModalVisible = () => {};
+  let modal = props.showModal ? (
+    <AddColor changeModal={props.changeModal} />
+  ) : (
+    true
+  );
+
   let activeTheme;
   try {
     activeTheme =
@@ -41,12 +49,18 @@ function SidebarColor(props) {
   }
   return (
     <div className={wrapstyle.sidebar_color}>
-      Theme
+      Themes
+      {modal}
       <div className={wrapstyle.color_container}>
         {props.data.map((color) =>
           colorboxBuilder(color, color.id === activeTheme, props.update)
         )}
-        <div className={wrapstyle["add-color_item"]}>+</div>
+        <div
+          onClick={() => props.changeModal()}
+          className={wrapstyle["add-color_item"]}
+        >
+          +
+        </div>
       </div>
     </div>
   );

@@ -292,3 +292,22 @@
     /* color: #F44336; */
     border-width: 2px;
 }
+.not_selected_item {
+        color: #20283E;
+        background: #EFF5F4;
+        padding: 2rem 4rem;
+        border-radius: .4rem;
+        margin: .5rem 0rem;
+        font-weight: 300;
+
+}
+.not_selected_item p{
+    padding: .4rem 0rem;
+    font-weight: 300;
+}
+.not_selected{
+    text-align: center;
+    padding: 1rem;
+    padding-bottom: 2rem;
+    font-weight: 400;
+}

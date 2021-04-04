@@ -82,11 +82,19 @@ class Wrapper extends Component {
           bg: "#0f0",
         },
       ],
+      colorModalDisplay: false,
     };
   }
   setActive = (id) => {
     this.setState({
       activeFolder: id,
+    });
+  };
+
+  setColorModal = () => {
+    let isTrue = this.state.colorModalDisplay;
+    this.setState({
+      colorModalDisplay: !isTrue,
     });
   };
 
@@ -125,6 +133,9 @@ class Wrapper extends Component {
     this.setState((prevState) => ({
       folders: prevState.folders.filter((item) => item.id !== id),
     }));
+    this.setState({
+      activeFolder: null,
+    });
   };
 
   render() {
@@ -149,6 +160,8 @@ class Wrapper extends Component {
           active={this.state.activeFolder}
           data={this.state.themes}
           folders={this.state.folders}
+          showModal={this.state.colorModalDisplay}
+          changeModal={this.setColorModal}
         />
       </div>
     );

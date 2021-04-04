@@ -32,6 +32,8 @@ function MainArea(props) {
   };
   let filter_folder = (item) => item.folder === props.active;
   let items_to_display = props.data.filter((item) => filter_folder(item));
+  // console.log(items_to_display.length);
+  // console.log(props.active);
 
   // console.log(items_to_display);
 
@@ -54,11 +56,33 @@ function MainArea(props) {
     );
   };
 
+  let no_folder_selected = (
+    <div className={wrapstyle.not_selected_item}>
+      <div className={wrapstyle["main_item-title"]}>
+        <h3 className={wrapstyle["not_selected"]}>Welcome to planX</h3>
+      </div>
+      <p>
+        Select a folder from the folders tab to view the tasks present in that
+        folder
+      </p>
+      <p>
+        Create a new folder or delete an existing folder from the folders tab
+      </p>
+      <p>Use the theme tab to update the theme for the selected folder</p>
+      <p>add a new custom theme from the theme tab</p>
+      <p>
+        Add a new task, update or delete an existing task from the main area
+      </p>
+    </div>
+  );
+
   return (
     <div className={wrapstyle.main_area}>
-      <div className={wrapstyle["main_item-head"]}>Tasks ( school )</div>
+      <div className={wrapstyle["main_item-head"]}>Tasks</div>
       <div className={wrapstyle.main_container}>
-        {items_to_display.map((task) => item_builder(task))}
+        {items_to_display.length > 0
+          ? items_to_display.map((task) => item_builder(task))
+          : no_folder_selected}
       </div>
     </div>
   );
