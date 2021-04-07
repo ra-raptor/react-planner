@@ -24,4 +24,56 @@
     text-align: center;
     margin: 10px 0;
     color: #20283E;
+    line-height: 45px;
+}
+
+.close{
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: 0;
+    left: 90%;
+    margin: 10px 0;
+    line-height: 45px;
+    font-weight: 200;
+    cursor: pointer;
+    font-size: 1.4rem;
+}
+
+.input_folder{
+    position: relative;
+    top: 30%;
+    transform: translateY(-50%);
+    width: 100%;
+    padding: 1rem;
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.input_folder input{
+    font-family: 'Montserrat';
+    margin: 0 .3rem;
+    width: 50%;
+    padding: .6rem 1rem ;
+    border: 1px solid #20283E;
+    border-radius: .2rem;    
+}
+
+.input_folder button{
+    min-width: 90px;
+    width: 15%;
+    padding: .5rem .5rem;
+    border-radius: .2rem;
+    background: rgb(14, 175, 127);
+    border: none;
+    color: #EFF5F4;
+    font-size: 1.1rem;
+}
+
+.input_folder button:hover{
+    background: rgb(46, 175, 14);
+    
 }

@@ -37,7 +37,9 @@
     font-size: 1.2rem;
     /* background-color: #eff5f4; */
     background-color: #EFF5F4;
+    word-break: break-all;
     width: 100%;
+    max-width: 450px;
     height: 100%;
     grid-row: 1/2;
     grid-column: 1/9;
@@ -98,6 +100,7 @@
 
 .folder_container{
     font-size: 1rem;
+
 }
 
 .folder_container div{

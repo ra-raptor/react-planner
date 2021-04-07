@@ -36,7 +36,7 @@ let folderGenerator = (folder, theme, active, chfunc, dlfunc) => {
 
 function SidebarFolder(props) {
   let modal = props.showModal ? (
-    <AddFolder toggleModal={props.toggleModal} />
+    <AddFolder addFolder={props.addFolder} toggleModal={props.toggleModal} />
   ) : null;
   // console.log(props.theme);
   return (

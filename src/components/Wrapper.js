@@ -10,6 +10,7 @@ class Wrapper extends Component {
 
     this.state = {
       activeFolder: 0,
+      totalFolders: 1,
       tasks: [
         {
           id: 0,
@@ -20,14 +21,14 @@ class Wrapper extends Component {
         },
         {
           id: 1,
-          folder: 0,
+          folder: 1,
           title: "2 Lorem ipsum dolor sit amet consectetur adipisicing.",
           content:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         },
         {
           id: 2,
-          folder: 1,
+          folder: 2,
           title: "3 Lorem ipsum dolor sit amet consectetur adipisicing.",
           content:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
@@ -36,22 +37,7 @@ class Wrapper extends Component {
       folders: [
         {
           id: 0,
-          title: "College",
-          theme: 1,
-        },
-        {
-          id: 1,
-          title: "School",
-          theme: 2,
-        },
-        {
-          id: 3,
-          title: "School",
-          theme: 3,
-        },
-        {
-          id: 2,
-          title: "School",
+          title: "Test",
           theme: 0,
         },
       ],
@@ -116,6 +102,12 @@ class Wrapper extends Component {
     }
   };
 
+  remove_task_without_confirmation = (id) => {
+    this.setState((prevState) => ({
+      tasks: prevState.tasks.filter((item) => item.id !== id),
+    }));
+  };
+
   updateTheme = (id) => {
     let curr = this.state.folders.findIndex(
       (ele) => ele.id === this.state.activeFolder
@@ -141,7 +133,7 @@ class Wrapper extends Component {
         id_list.push(i.id);
       });
       id_list.forEach((idl) => {
-        this.remove_task(idl);
+        this.remove_task_without_confirmation(idl);
       });
 
       this.setState((prevState) => ({
@@ -151,6 +143,21 @@ class Wrapper extends Component {
         activeFolder: null,
       });
     }
+  };
+
+  addFolder = (text) => {
+    let newID = this.state.totalFolders;
+    let newFolder = {
+      id: newID,
+      title: text,
+      theme: 0,
+    };
+    let folders = this.state.folders;
+    folders.push(newFolder);
+    this.setState({
+      folders: folders,
+      totalFolders: newID + 1,
+    });
   };
 
   render() {
@@ -171,6 +178,7 @@ class Wrapper extends Component {
           delFolder={this.deleteFolder}
           showModal={this.state.folderModalDisplay}
           toggleModal={this.addFolderModal}
+          addFolder={this.addFolder}
         />
         <SidebarColor
           update={this.updateTheme}
