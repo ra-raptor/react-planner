@@ -10,8 +10,8 @@
 
 .modalBox{
     min-width: 300px;
-    width: 50vw;
-    height: 300px;
+    min-width: 50vw;
+    min-height: 300px;
     background: #EFF5F4;
     position: absolute;
     top: 50%;
@@ -40,9 +40,12 @@
     font-size: 1.4rem;
 }
 
+/************************************************************************/
+/** add folder **/
+
 .input_folder{
     position: relative;
-    top: 30%;
+    top: 100px;
     transform: translateY(-50%);
     width: 100%;
     padding: 1rem;
@@ -57,6 +60,7 @@
     font-family: 'Montserrat';
     margin: 0 .3rem;
     width: 50%;
+    min-width: 200px;
     padding: .6rem 1rem ;
     border: 1px solid #20283E;
     border-radius: .2rem;    
@@ -77,3 +81,77 @@
     background: rgb(46, 175, 14);
     
 }
+
+/****************************************************************************/
+/** add color */
+
+.addColorWrapper{
+    display: flex;
+    /* background-color: #ff0; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: .5rem 1rem;
+    
+}
+
+.addColorWrapper>div{
+    
+    padding: 1.5rem 1rem;
+    width: 80%;
+}
+
+.sampleColor{
+    margin: .6rem 1rem;
+    border-radius: .6rem;
+    font-size: 1.5rem;
+    background: #fff;
+}
+
+.colorPickerWrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    
+    padding: .8rem .5rem;
+    margin: 0;
+    
+}
+.colorPickerWrapper>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.colorPickerWrapper>div>button{
+    background: transparent;
+    border: 1px solid red;
+    border-radius: .5rem;
+    margin : 1rem;
+    font-size: 1.2rem;
+    margin-top: .8rem;
+    min-width: 200px;
+    min-height: 40px;
+}
+.colorPickerWrapper>div>button:hover{
+    background-color: #fff;
+}
+
+@media screen and (max-width : 1400px) {
+    .colorPickerWrapper{
+        min-width: 70vw;
+    }
+}
+
+@media screen and (max-width : 800px) {
+
+    .colorPickerWrapper{
+        flex-direction: column;
+    }
+
+.modalBox{
+    min-width: 80vw;
+}
+}
+

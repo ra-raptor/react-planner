@@ -20,8 +20,10 @@ class AddFolder extends Component {
   };
 
   handleSubmit = () => {
+    if(this.state.text !== ""){
     this.props.addFolder(this.state.text);
     this.props.toggleModal();
+    }
   };
 
   render() {
