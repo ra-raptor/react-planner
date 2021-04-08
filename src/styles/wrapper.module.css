@@ -305,12 +305,32 @@
 
 }
 .not_selected_item p{
-    padding: .4rem 0rem;
+    padding: .6rem 0rem;
     font-weight: 300;
 }
 .not_selected{
     text-align: center;
-    padding: 1rem;
+    padding: .6rem;
     padding-bottom: 2rem;
+    color: rgb(201, 42, 42);
     font-weight: 400;
+}
+
+.addCard{
+    margin: .6rem 0rem;
+    font-weight: 600;
+    text-align: center;
+    color: #20283E;
+    padding: .6rem 1rem;
+    border: 2px solid #20283E;
+    font-size: 1.2rem;
+    border-radius: .6rem;
+
+}
+
+.addCard:hover{
+    background-color: #20283E;
+    transition: .2s ease-in-out;
+    color: #eee;
+    cursor:pointer;
 }

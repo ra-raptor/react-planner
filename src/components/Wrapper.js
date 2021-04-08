@@ -10,6 +10,7 @@ class Wrapper extends Component {
 
     this.state = {
       activeFolder: 0,
+      recentlyDeleted: -1,
       totalFolders: 1,
       totalThemes: 5,
       tasks: [
@@ -139,10 +140,8 @@ class Wrapper extends Component {
 
       this.setState((prevState) => ({
         folders: prevState.folders.filter((item) => item.id !== id),
+        recentlyDeleted: id,
       }));
-      this.setState({
-        activeFolder: null,
-      });
     }
   };
 
@@ -180,6 +179,7 @@ class Wrapper extends Component {
     return (
       <div className={wrapstyle.wrapper}>
         <MainArea
+          recentlyDeleted={this.state.recentlyDeleted}
           data={this.state.tasks}
           active={this.state.activeFolder}
           theme={this.state.themes}

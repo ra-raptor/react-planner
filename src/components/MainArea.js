@@ -56,32 +56,42 @@ function MainArea(props) {
     );
   };
 
+  let folder_selected = (
+    <React.Fragment>
+      <div>{items_to_display.map((task) => item_builder(task))}</div>
+      <div className={wrapstyle.addCard}>ADD CARD</div>
+    </React.Fragment>
+  );
+
   let no_folder_selected = (
     <div className={wrapstyle.not_selected_item}>
       <div className={wrapstyle["main_item-title"]}>
-        <h3 className={wrapstyle["not_selected"]}>Welcome to planX</h3>
+        <h3 className={wrapstyle["not_selected"]}>No Folders Selected</h3>
       </div>
       <p>
-        Select a folder from the folders tab to view the tasks present in that
-        folder
+        Select a folder from the folders tab to view the cards present in that
+        folder.
       </p>
       <p>
         Create a new folder or delete an existing folder from the folders tab
       </p>
-      <p>Use the theme tab to update the theme for the selected folder</p>
-      <p>add a new custom theme from the theme tab</p>
-      <p>
-        Add a new task, update or delete an existing task from the main area
-      </p>
     </div>
   );
 
+  let activeFolder = props.folders.filter(
+    (folder) => folder.id === props.active
+  );
+
+  let heading =
+    props.recentlyDeleted !== props.active ? activeFolder[0].title : "PlanX";
+
   return (
     <div className={wrapstyle.main_area}>
-      <div className={wrapstyle["main_item-head"]}>Tasks</div>
+      <div className={wrapstyle["main_item-head"]}>{heading}</div>
       <div className={wrapstyle.main_container}>
-        {items_to_display.length > 0
-          ? items_to_display.map((task) => item_builder(task))
+        {props.recentlyDeleted !== props.active
+          ? // ? items_to_display.map((task) => item_builder(task))
+            folder_selected
           : no_folder_selected}
       </div>
     </div>
