@@ -32,7 +32,7 @@ class AddFolder extends Component {
         <div className={modalStyle.overlay}></div>
         <div className={modalStyle.modalBox}>
           <h1 className={modalStyle.title}>Add Folder</h1>
-          <div className={modalStyle.input_folder}>
+          <form className={modalStyle.input_folder}>
             <input
               autoFocus
               onChange={this.handleInput}
@@ -40,7 +40,7 @@ class AddFolder extends Component {
               placeholder="Enter folder name"
             />
             <button onClick={this.handleSubmit}>ADD</button>
-          </div>
+          </form>
 
           <div
             className={modalStyle.close}
