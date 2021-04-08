@@ -11,6 +11,7 @@ class Wrapper extends Component {
     this.state = {
       activeFolder: 0,
       totalFolders: 1,
+      totalThemes: 5,
       tasks: [
         {
           id: 0,
@@ -44,8 +45,8 @@ class Wrapper extends Component {
       themes: [
         {
           id: 0,
-          fg: "#fff",
-          bg: "#000",
+          fg: "#000",
+          bg: "#fff",
         },
         {
           id: 1,
@@ -160,6 +161,21 @@ class Wrapper extends Component {
     });
   };
 
+  addTheme = (fg, bg) => {
+    let newID = this.state.totalThemes;
+    let newTheme = {
+      id: newID,
+      fg: fg,
+      bg: bg,
+    };
+    let themes = this.state.themes;
+    themes.push(newTheme);
+    this.setState({
+      themes: themes,
+      totalThemes: newID + 1,
+    });
+  };
+
   render() {
     return (
       <div className={wrapstyle.wrapper}>
@@ -187,6 +203,7 @@ class Wrapper extends Component {
           folders={this.state.folders}
           showModal={this.state.colorModalDisplay}
           changeModal={this.setColorModal}
+          addTheme={this.addTheme}
         />
       </div>
     );

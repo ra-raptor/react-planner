@@ -1,4 +1,9 @@
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+  faEyeSlash,
+  faPhotoVideo,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { SketchPicker } from "react-color";
@@ -22,12 +27,23 @@ class AddColor extends Component {
     this.setState({
       showFgPicker: newState,
     });
+    if (newState == true && window.innerWidth <= 800) {
+      this.setState({
+        showBgPicker: false,
+      });
+    }
   };
+
   toggleBgPicker = () => {
     let newState = !this.state.showBgPicker;
     this.setState({
       showBgPicker: newState,
     });
+    if (newState == true && window.innerWidth <= 800) {
+      this.setState({
+        showFgPicker: false,
+      });
+    }
   };
 
   handlefgChange = (color) => {
@@ -36,6 +52,20 @@ class AddColor extends Component {
 
   handlebgChange = (color) => {
     this.setState({ bg: color.hex });
+  };
+
+  doneButtonHandler = () => {
+    let fg = this.state.fg;
+    let bg = this.state.bg;
+    if (
+      (fg != "#000" && fg != "#000000") ||
+      (bg != "#fff" && bg != "#ffffff")
+    ) {
+      this.props.addTheme(fg, bg);
+      this.props.changeModal();
+    } else {
+      alert("please create a custom theme..");
+    }
   };
 
   render() {
@@ -62,6 +92,18 @@ class AddColor extends Component {
       ""
     );
 
+    let showHideIconStyle = {
+      marginLeft: "1rem",
+    };
+
+    let iconBuilder = (val) => {
+      if (val) {
+        return <FontAwesomeIcon icon={faEyeSlash} style={showHideIconStyle} />;
+      } else {
+        return <FontAwesomeIcon icon={faEye} style={showHideIconStyle} />;
+      }
+    };
+
     return ReactDom.createPortal(
       <React.Fragment>
         <div className={modalStyle.overlay}></div>
@@ -75,15 +117,20 @@ class AddColor extends Component {
               <div>
                 <button onClick={this.toggleFgPicker} style={fgbtnStyle}>
                   Foreground
+                  {iconBuilder(this.state.showFgPicker)}
                 </button>
                 {FgPicker}
               </div>
               <div>
                 <button onClick={this.toggleBgPicker} style={bgbtnStyle}>
                   Background
+                  {iconBuilder(this.state.showBgPicker)}
                 </button>
                 {BgPicker}
               </div>
+            </div>
+            <div className={modalStyle.submitColorWrapper}>
+              <button onClick={this.doneButtonHandler}>DONE</button>
             </div>
           </div>
 

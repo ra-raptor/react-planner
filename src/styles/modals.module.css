@@ -98,19 +98,21 @@
 
 .addColorWrapper>div{
     
-    padding: 1.5rem 1rem;
+    
     width: 80%;
 }
 
 .sampleColor{
     margin: .6rem 1rem;
     border-radius: .6rem;
+    padding: 1.5rem 1rem;
     font-size: 1.5rem;
     background: #fff;
 }
 
 .colorPickerWrapper{
     display: flex;
+    padding: 1.5rem 1rem;
     justify-content: space-around;
     align-items: center;
     text-align: center;
@@ -153,5 +155,26 @@
 .modalBox{
     min-width: 80vw;
 }
+}
+.submitColorWrapper{
+    padding: .5rem;
+    padding-bottom: 1rem;
+}
+.submitColorWrapper button{
+    width: 100%;
+    min-height: 40px;
+    min-width: 100px;
+    padding: .5rem .5rem;
+    border-radius: .5rem;
+    background: rgb(14, 175, 127);
+    border: none;
+    color: #EFF5F4;
+    font-size: 1.1rem;
+
+
+}
+
+.submitColorWrapper button:hover{
+    background: rgb(46, 175, 14);
 }
 

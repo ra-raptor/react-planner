@@ -35,7 +35,7 @@ let colorboxBuilder = (item, active, updfunc) => {
 function SidebarColor(props) {
   let setModalVisible = () => {};
   let modal = props.showModal ? (
-    <AddColor changeModal={props.changeModal} />
+    <AddColor addTheme={props.addTheme} changeModal={props.changeModal} />
   ) : (
     true
   );
