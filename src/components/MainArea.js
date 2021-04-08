@@ -3,6 +3,7 @@ import wrapstyle from "../styles/wrapper.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import AddTask from "./modals/AddTask";
 
 function MainArea(props) {
   let display_now = true;
@@ -59,7 +60,9 @@ function MainArea(props) {
   let folder_selected = (
     <React.Fragment>
       <div>{items_to_display.map((task) => item_builder(task))}</div>
-      <div className={wrapstyle.addCard}>ADD CARD</div>
+      <div onClick={props.toggleAddTask} className={wrapstyle.addCard}>
+        ADD CARD
+      </div>
     </React.Fragment>
   );
 
@@ -85,6 +88,15 @@ function MainArea(props) {
   let heading =
     props.recentlyDeleted !== props.active ? activeFolder[0].title : "PlanX";
 
+  let addModal = props.showAddTask ? (
+    <AddTask
+      toggleAddTask={props.toggleAddTask}
+      folderId={activeFolder[0].id}
+      title={heading}
+      addTask={props.addTask}
+    />
+  ) : null;
+
   return (
     <div className={wrapstyle.main_area}>
       <div className={wrapstyle["main_item-head"]}>{heading}</div>
@@ -93,6 +105,7 @@ function MainArea(props) {
           ? // ? items_to_display.map((task) => item_builder(task))
             folder_selected
           : no_folder_selected}
+        {addModal}
       </div>
     </div>
   );

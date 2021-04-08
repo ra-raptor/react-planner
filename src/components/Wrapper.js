@@ -13,6 +13,7 @@ class Wrapper extends Component {
       recentlyDeleted: -1,
       totalFolders: 1,
       totalThemes: 5,
+      totalTasks: 3,
       tasks: [
         {
           id: 0,
@@ -82,6 +83,7 @@ class Wrapper extends Component {
     });
   };
 
+  // toggles the modal to add colour themes
   setColorModal = () => {
     let isTrue = this.state.colorModalDisplay;
     this.setState({
@@ -89,21 +91,37 @@ class Wrapper extends Component {
     });
   };
 
+  //toggles the modal to add new Folders
   addFolderModal = () => {
     this.setState({
       folderModalDisplay: !this.state.folderModalDisplay,
     });
   };
 
+  //toggles the add Task(Card) modal
+  addTaskModal = () => {
+    this.setState({ addTaskModalDisplay: !this.state.addTaskModalDisplay });
+  };
+
+  //toggles the edit Task(Card) modal
+  editTaskModal = () => {
+    this.setState({
+      editTaskModalDisplay: !this.state.editTaskModalDisplay,
+    });
+  };
+
+  //removes task with a confirm alert
   remove_task = (id) => {
     let x = window.confirm("Are you sure, you want to delete this task?");
     if (x) {
       this.setState((prevState) => ({
+        //filters for everytask that is not with the given "id"
         tasks: prevState.tasks.filter((item) => item.id !== id),
       }));
     }
   };
 
+  //removes the task without confiration (for clearing tasks of deleted folder)
   remove_task_without_confirmation = (id) => {
     this.setState((prevState) => ({
       tasks: prevState.tasks.filter((item) => item.id !== id),
@@ -175,6 +193,22 @@ class Wrapper extends Component {
     });
   };
 
+  addTask = (folder, title, body) => {
+    let newID = this.state.totalTasks;
+    let newTask = {
+      id: newID,
+      folder: folder,
+      title: title,
+      content: body,
+    };
+    let tasks = this.state.tasks;
+    tasks.push(newTask);
+    this.setState({
+      tasks: tasks,
+      totalTasks: newID + 1,
+    });
+  };
+
   render() {
     return (
       <div className={wrapstyle.wrapper}>
@@ -185,6 +219,11 @@ class Wrapper extends Component {
           theme={this.state.themes}
           folders={this.state.folders}
           delTask={this.remove_task}
+          showAddTask={this.state.addTaskModalDisplay}
+          toggleAddTask={this.addTaskModal}
+          showEditTask={this.state.editTaskModalDisplay}
+          toggleEditTAsk={this.editTaskModal}
+          addTask={this.addTask}
         />
         <SidebarFolder
           data={this.state.folders}

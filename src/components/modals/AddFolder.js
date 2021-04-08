@@ -19,7 +19,8 @@ class AddFolder extends Component {
     });
   };
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     if (this.state.text !== "") {
       this.props.addFolder(this.state.text);
       this.props.toggleModal();
@@ -32,14 +33,19 @@ class AddFolder extends Component {
         <div className={modalStyle.overlay}></div>
         <div className={modalStyle.modalBox}>
           <h1 className={modalStyle.title}>Add Folder</h1>
-          <form className={modalStyle.input_folder}>
+          <form
+            className={modalStyle.input_folder}
+            onSubmit={this.handleSubmit}
+          >
             <input
+              required
               autoFocus
               onChange={this.handleInput}
               type="text"
               placeholder="Enter folder name"
             />
-            <button onClick={this.handleSubmit}>ADD</button>
+            <input onClick={this.handleSubmit} type="submit" value="ADD" />
+            {/* <button onClick={this.handleSubmit}>ADD</button> */}
           </form>
 
           <div
