@@ -1,9 +1,4 @@
-import {
-  faEye,
-  faEyeSlash,
-  faPhotoVideo,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { SketchPicker } from "react-color";
@@ -27,7 +22,7 @@ class AddColor extends Component {
     this.setState({
       showFgPicker: newState,
     });
-    if (newState == true && window.innerWidth <= 800) {
+    if (newState === true && window.innerWidth <= 800) {
       this.setState({
         showBgPicker: false,
       });
@@ -39,7 +34,7 @@ class AddColor extends Component {
     this.setState({
       showBgPicker: newState,
     });
-    if (newState == true && window.innerWidth <= 800) {
+    if (newState === true && window.innerWidth <= 800) {
       this.setState({
         showFgPicker: false,
       });
@@ -58,8 +53,8 @@ class AddColor extends Component {
     let fg = this.state.fg;
     let bg = this.state.bg;
     if (
-      (fg != "#000" && fg != "#000000") ||
-      (bg != "#fff" && bg != "#ffffff")
+      (fg !== "#000" && fg !== "#000000") ||
+      (bg !== "#fff" && bg !== "#ffffff")
     ) {
       this.props.addTheme(fg, bg);
       this.props.changeModal();

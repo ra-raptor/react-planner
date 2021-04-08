@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import reactDom from "react-dom";
 import modalStyle from "../../styles/modals.module.css";
-import { faCheck, faCross, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class AddFolder extends Component {
@@ -20,9 +20,9 @@ class AddFolder extends Component {
   };
 
   handleSubmit = () => {
-    if(this.state.text !== ""){
-    this.props.addFolder(this.state.text);
-    this.props.toggleModal();
+    if (this.state.text !== "") {
+      this.props.addFolder(this.state.text);
+      this.props.toggleModal();
     }
   };
 
@@ -34,6 +34,7 @@ class AddFolder extends Component {
           <h1 className={modalStyle.title}>Add Folder</h1>
           <div className={modalStyle.input_folder}>
             <input
+              autoFocus
               onChange={this.handleInput}
               type="text"
               placeholder="Enter folder name"
