@@ -18,29 +18,36 @@ class Wrapper extends Component {
         {
           id: 0,
           folder: 0,
-          title: "vfLorem ipsum dolor sit amet consectetur adipisicing.",
+          title: "What is PlanX?",
           content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "PlanX is a simple card based todo-list type planning web app made with React Js. Users can organise cards into folders and can apply custom themes.",
         },
         {
           id: 1,
-          folder: 1,
-          title: "2 Lorem ipsum dolor sit amet consectetur adipisicing.",
+          folder: 0,
+          title: "How to manage folders?",
           content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "Use the folders tab to select folders, delete folders and to create new folders. Click on the desired folder to open its content.",
         },
         {
           id: 2,
-          folder: 2,
-          title: "3 Lorem ipsum dolor sit amet consectetur adipisicing.",
+          folder: 0,
+          title: "How to work with Cards?",
           content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+            "After selecting a folder, the cards in that folder will be displayed. Use the Edit button to edit the content of the card and the delete button to delete a card. new cards can be added by add card button.",
+        },
+        {
+          id: 3,
+          folder: 0,
+          title: "How to create Themes?",
+          content:
+            "Select a theme from the theme tab. The theme will be applied to the selected folder. New themes can be also be created by choosing the background and foreground colour.",
         },
       ],
       folders: [
         {
           id: 0,
-          title: "Test",
+          title: "Tutorial",
           theme: 0,
         },
       ],
@@ -52,23 +59,23 @@ class Wrapper extends Component {
         },
         {
           id: 1,
-          fg: "#fff",
-          bg: "#f00",
+          fg: "#581818",
+          bg: "#d8f0d6",
         },
         {
           id: 2,
-          fg: "#000",
-          bg: "#ff0",
+          fg: "#250706",
+          bg: "#d8eef0",
         },
         {
           id: 3,
-          fg: "#fff",
-          bg: "#f0f",
+          fg: "#d9d6f0",
+          bg: "#197d88",
         },
         {
           id: 4,
-          fg: "#f0f",
-          bg: "#0f0",
+          fg: "#ffffff",
+          bg: "#b2413a",
         },
       ],
       colorModalDisplay: false,
