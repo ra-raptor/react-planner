@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import AddTask from "./modals/AddTask";
+import EditTask from "./modals/EditTask";
 
 function MainArea(props) {
   let display_now = true;
@@ -31,12 +32,16 @@ function MainArea(props) {
     borderColor: active_theme?.fg,
     color: active_theme?.fg,
   };
-  let filter_folder = (item) => item.folder === props.active;
+  let filter_folder = (item) => item?.folder === props.active;
   let items_to_display = props.data.filter((item) => filter_folder(item));
   // console.log(items_to_display.length);
   // console.log(props.active);
 
   // console.log(items_to_display);
+  let showEditModal = (id) => {
+    props.setTaskToEdit(id);
+    props.toggleEditTask();
+  };
 
   let item_builder = (item) => {
     return (
@@ -46,7 +51,7 @@ function MainArea(props) {
         </div>
         <p>{item.content}</p>
         <div className={wrapstyle["main_item-buttons"]}>
-          <button style={button_style}>
+          <button onClick={() => showEditModal(item.id)} style={button_style}>
             <FontAwesomeIcon icon={faPencilAlt} />
           </button>
           <button onClick={() => props.delTask(item.id)} style={button_style}>
@@ -84,7 +89,6 @@ function MainArea(props) {
   let activeFolder = props.folders.filter(
     (folder) => folder.id === props.active
   );
-
   let heading =
     props.recentlyDeleted !== props.active ? activeFolder[0].title : "PlanX";
 
@@ -97,6 +101,18 @@ function MainArea(props) {
     />
   ) : null;
 
+  let editModal = props.showEditTask ? (
+    <EditTask
+      toggleEditTask={props.toggleEditTask}
+      folderName={heading}
+      taskToEdit={props.taskToEdit}
+      updateTask={props.updateTask}
+      taskContent={
+        items_to_display.filter((item) => item.id === props.taskToEdit)[0]
+      }
+    />
+  ) : null;
+
   return (
     <div className={wrapstyle.main_area}>
       <div className={wrapstyle["main_item-head"]}>{heading}</div>
@@ -106,6 +122,7 @@ function MainArea(props) {
             folder_selected
           : no_folder_selected}
         {addModal}
+        {editModal}
       </div>
     </div>
   );

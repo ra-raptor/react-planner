@@ -75,6 +75,7 @@ class Wrapper extends Component {
       folderModalDisplay: false,
       addTaskModalDisplay: false,
       editTaskModalDisplay: false,
+      taskToEdit: -1,
     };
   }
   setActive = (id) => {
@@ -116,7 +117,7 @@ class Wrapper extends Component {
     if (x) {
       this.setState((prevState) => ({
         //filters for everytask that is not with the given "id"
-        tasks: prevState.tasks.filter((item) => item.id !== id),
+        tasks: prevState.tasks.filter((item) => item?.id !== id),
       }));
     }
   };
@@ -209,6 +210,28 @@ class Wrapper extends Component {
     });
   };
 
+  setTaskToEdit = (id) => {
+    this.setState({
+      taskToEdit: id,
+    });
+  };
+
+  updateTask = (id, title, content) => {
+    const newList = this.state.tasks.map((item) => {
+      if (item?.id === id) {
+        return {
+          ...item,
+          title: title,
+          content: content,
+        };
+      }
+      return item;
+    });
+    this.setState({
+      tasks: newList,
+    });
+  };
+
   render() {
     return (
       <div className={wrapstyle.wrapper}>
@@ -222,8 +245,11 @@ class Wrapper extends Component {
           showAddTask={this.state.addTaskModalDisplay}
           toggleAddTask={this.addTaskModal}
           showEditTask={this.state.editTaskModalDisplay}
-          toggleEditTAsk={this.editTaskModal}
+          toggleEditTask={this.editTaskModal}
           addTask={this.addTask}
+          taskToEdit={this.state.taskToEdit}
+          setTaskToEdit={this.setTaskToEdit}
+          updateTask={this.updateTask}
         />
         <SidebarFolder
           data={this.state.folders}
