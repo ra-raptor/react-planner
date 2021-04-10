@@ -21,7 +21,9 @@
     
     
 }
-
+.navbar ul a{
+    text-decoration: none;
+}
 .navbar ul li{
     list-style-type: none;
     padding: 0 .5rem;

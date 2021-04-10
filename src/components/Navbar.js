@@ -6,9 +6,15 @@ function Navbar() {
     <nav className={`hello ${navcss.navbar}`}>
       <div className={navcss.brand}>PlanX</div>
       <ul>
-        <li>About</li>
-        <li>FAQ</li>
-        <li>Contact</li>
+        <a href="">
+          <li>About</li>
+        </a>
+        <a href="https://github.com/ra-raptor/react-planner" target="_blank">
+          <li>Github</li>
+        </a>
+        <a href="">
+          <li>Contact</li>
+        </a>
       </ul>
     </nav>
   );
