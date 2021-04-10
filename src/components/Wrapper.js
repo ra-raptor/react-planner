@@ -13,7 +13,7 @@ class Wrapper extends Component {
       recentlyDeleted: -1,
       totalFolders: 1,
       totalThemes: 5,
-      totalTasks: 3,
+      totalTasks: 4,
       tasks: [
         {
           id: 0,
@@ -85,10 +85,95 @@ class Wrapper extends Component {
       taskToEdit: -1,
     };
   }
+
+  componentDidMount() {
+    let areFoldersPresent = true;
+    let foldersInLocalStorage = localStorage.getItem("folders");
+    let tasksInLocalStorage = localStorage.getItem("tasks");
+    let activeFolderLocalSTorage = localStorage.getItem("activeFolder");
+    // managing folders and activestate
+    if (foldersInLocalStorage) {
+      let folderList = JSON.parse(foldersInLocalStorage);
+      // if length of folders in localstorage is greater than 0 check if the activefolder is present ? else make the first folder as active
+      if (folderList.length > 0) {
+        let firstFolder = folderList[0];
+        if (activeFolderLocalSTorage) {
+          let queryList = folderList.filter(
+            (folder) => folder.id === parseInt(activeFolderLocalSTorage)
+          );
+          // if active folder is already present
+          if (queryList.length > 0) {
+            this.setState({
+              activeFolder: parseInt(localStorage.getItem("activeFolder")),
+            });
+          } else {
+            // else make the first folder active
+            this.setState({
+              activeFolder: firstFolder.id,
+            });
+          }
+        }
+      } else {
+        // if no folders are present in localstorage
+        // keep the folder / task / totalFolder / totalTask / activeFolder same as default
+        areFoldersPresent = false;
+        this.setState({
+          activeFolder: 0,
+        });
+      }
+    }
+
+    //removing obselete tasks
+    if (tasksInLocalStorage && foldersInLocalStorage && areFoldersPresent) {
+      let taskList = JSON.parse(tasksInLocalStorage);
+      let folderList = JSON.parse(foldersInLocalStorage);
+      let IDlist = [];
+      folderList.forEach((folder) => {
+        IDlist.push(folder.id);
+      });
+      let newList = taskList.filter((task) => IDlist.includes(task.folder, 0));
+      this.setState({
+        tasks: newList,
+      });
+    }
+    //totalThemes
+    localStorage.getItem("totalThemes") &&
+      this.setState({
+        totalThemes: parseInt(localStorage.getItem("totalThemes")),
+      });
+    //totalFolders
+    areFoldersPresent &&
+      localStorage.getItem("totalFolders") &&
+      this.setState({
+        totalFolders: parseInt(localStorage.getItem("totalFolders")),
+      });
+
+    //totalTasks
+    areFoldersPresent &&
+      localStorage.getItem("totalTasks") &&
+      this.setState({
+        totalTasks: parseInt(localStorage.getItem("totalTasks")),
+      });
+
+    //folders
+    areFoldersPresent &&
+      localStorage.getItem("folders") &&
+      this.setState({
+        folders: JSON.parse(localStorage.getItem("folders")),
+      });
+    //themes
+    localStorage.getItem("themes") &&
+      this.setState({
+        themes: JSON.parse(localStorage.getItem("themes")),
+      });
+  }
+
   setActive = (id) => {
     this.setState({
       activeFolder: id,
     });
+    localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
+    localStorage.setItem("activeFolder", id);
   };
 
   // toggles the modal to add colour themes
@@ -126,9 +211,12 @@ class Wrapper extends Component {
         //filters for everytask that is not with the given "id"
         tasks: prevState.tasks.filter((item) => item?.id !== id),
       }));
+      let newTasks = this.state.tasks.filter((item) => item?.id !== id);
+      localStorage.setItem("tasks", JSON.stringify(newTasks));
     }
   };
 
+  // TODO : localstorgae
   //removes the task without confiration (for clearing tasks of deleted folder)
   remove_task_without_confirmation = (id) => {
     this.setState((prevState) => ({
@@ -150,6 +238,7 @@ class Wrapper extends Component {
     this.setState({
       folders: newFolder,
     });
+    localStorage.setItem("folders", JSON.stringify(newFolder));
   };
 
   deleteFolder = (id) => {
@@ -168,6 +257,12 @@ class Wrapper extends Component {
         folders: prevState.folders.filter((item) => item.id !== id),
         recentlyDeleted: id,
       }));
+
+      let newFolder = this.state.folders.filter((item) => item.id !== id);
+      localStorage.setItem("folders", JSON.stringify(newFolder));
+
+      // let newTasks = this.state.tasks.filter((item) => item?.id !== id);
+      // localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
     }
   };
 
@@ -184,6 +279,8 @@ class Wrapper extends Component {
       folders: folders,
       totalFolders: newID + 1,
     });
+    localStorage.setItem("folders", JSON.stringify(folders));
+    localStorage.setItem("totalFolders", newID + 1);
   };
 
   addTheme = (fg, bg) => {
@@ -199,6 +296,8 @@ class Wrapper extends Component {
       themes: themes,
       totalThemes: newID + 1,
     });
+    localStorage.setItem("themes", JSON.stringify(themes));
+    localStorage.setItem("totalThemes", newID + 1);
   };
 
   addTask = (folder, title, body) => {
@@ -215,6 +314,8 @@ class Wrapper extends Component {
       tasks: tasks,
       totalTasks: newID + 1,
     });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("totalTasks", newID + 1);
   };
 
   setTaskToEdit = (id) => {
@@ -237,6 +338,7 @@ class Wrapper extends Component {
     this.setState({
       tasks: newList,
     });
+    localStorage.setItem("tasks", JSON.stringify(newList));
   };
 
   render() {

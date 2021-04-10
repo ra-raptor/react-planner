@@ -90,12 +90,12 @@ function MainArea(props) {
     (folder) => folder.id === props.active
   );
   let heading =
-    props.recentlyDeleted !== props.active ? activeFolder[0].title : "PlanX";
+    props.recentlyDeleted !== props.active ? activeFolder[0]?.title : "PlanX";
 
   let addModal = props.showAddTask ? (
     <AddTask
       toggleAddTask={props.toggleAddTask}
-      folderId={activeFolder[0].id}
+      folderId={activeFolder[0]?.id}
       title={heading}
       addTask={props.addTask}
     />
