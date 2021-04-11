@@ -1,0 +1,63 @@
+.contact-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Montserrat";
+}
+.contact-wrapper h2{
+    padding:3rem;
+    font-size: 1.4rem;
+
+}
+
+.contact-wrapper .grid{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.contact-wrapper input[type="text"],
+input[type="email"] {
+    width: 100%;
+    min-width: 250px;
+    min-height: 40px;
+    margin: .4rem 0 1rem 0;
+    border-radius: .3rem;
+    border : 1px solid rgb(68, 135, 190);
+    padding-left: 1rem;
+    
+}
+.contact-wrapper textarea{
+    padding-top: .5rem;
+    margin: .4rem 0 1rem 0;
+    border-radius: .3rem;
+    border : 1px solid rgb(68, 135, 190);
+}
+.contact-wrapper label[for="message"]{
+    display: block;
+}
+.contact-wrapper input[type="submit"]{
+    width: 100%;
+    min-width: 250px;
+    min-height: 40px;
+    border-radius: .3rem;
+    background: rgb(14, 175, 127);
+    border: none;
+    color: #EFF5F4;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+.contact-wrapper input[type="submit"]:hover{
+    background: rgb(46, 175, 14);
+}
+
+@media screen and (min-width : 640px) {
+    .contact-wrapper h2 {
+        padding: 3.5rem;
+    }
+    .contact-wrapper input[type="submit"] {
+        width: 400px;
+    }
+    .contact-wrapper textarea{
+        width: 400px;
+    }
+}
