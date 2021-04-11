@@ -6,7 +6,9 @@
     background-color: #20283E;
     justify-content: space-between;
 }
-
+.navbar a{
+    text-decoration: none;
+}
 .brand {
     padding: 0 2rem;
     color: #d2dee0;

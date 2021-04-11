@@ -1,20 +1,23 @@
 import React from "react";
 import navcss from "../styles/navbar.module.css";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <nav className={`hello ${navcss.navbar}`}>
-      <div className={navcss.brand}>PlanX</div>
+      <Link to="/">
+        <div className={navcss.brand}>PlanX</div>
+      </Link>
       <ul>
-        <a href="/">
+        <Link to="/about">
           <li>About</li>
-        </a>
+        </Link>
         <a href="https://github.com/ra-raptor/react-planner">
           <li>Github</li>
         </a>
-        <a href="/">
+        <Link to="/contact">
           <li>Contact</li>
-        </a>
+        </Link>
       </ul>
     </nav>
   );
